@@ -5,12 +5,12 @@ steps:
   # Install dependencies
   - name: 'node'
     entrypoint: 'npm'
-    args: ['install']
+    args: ['run', 'install']
 
   # Test
   - name: 'node'
     entrypoint: 'npm'
-    args: ['test']
+    args: ['run', 'test']
 
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
