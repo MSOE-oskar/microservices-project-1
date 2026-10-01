@@ -43,16 +43,18 @@ describe('CartController', () => {
 
   describe('updateCart', () => {
     it('should pass the product to the service', () => {
-      controller.updateCart(1, product);
-
+      expect(controller.updateCart(1, product)).toEqual(
+        'Widget added to cart!',
+      );
       expect(cartService.addProductToCart).toHaveBeenCalledWith(1, product);
     });
   });
 
   describe('deleteCart', () => {
     it('should delete the cart via the service', () => {
-      controller.deleteCart(1);
-
+      expect(controller.deleteCart(1)).toEqual(
+        "Successfully deleted user 1's cart.",
+      );
       expect(cartService.deleteCart).toHaveBeenCalledWith(1);
     });
   });

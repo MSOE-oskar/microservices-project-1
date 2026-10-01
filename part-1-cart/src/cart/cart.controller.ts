@@ -12,12 +12,17 @@ export class CartController {
   }
 
   @Post(':userId')
-  updateCart(@Param('userId') userId: number, @Body() product: Product) {
+  updateCart(
+    @Param('userId') userId: number,
+    @Body() product: Product,
+  ): string {
     this.cartService.addProductToCart(userId, product);
+    return `${product.name} added to cart!`;
   }
 
   @Delete(':userId')
-  deleteCart(@Param('userId') userId: number) {
+  deleteCart(@Param('userId') userId: number): string {
     this.cartService.deleteCart(userId);
+    return `Successfully deleted user ${userId}'s cart.`;
   }
 }
