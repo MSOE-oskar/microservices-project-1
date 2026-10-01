@@ -18,9 +18,4 @@ describe('CartController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
-
-  it('getCart should delegate to the service', () => {
-    expect(controller.getCart()).toBe('TODO');
-    expect(cartService.test).toHaveBeenCalled();
-  });
 });

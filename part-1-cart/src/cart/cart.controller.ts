@@ -1,22 +1,23 @@
-import { Controller, Delete, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CartService } from './cart.service.js';
+import { type Product, type Cart } from '../interfaces/cart.interface.js';
 
 @Controller('cart')
 export class CartController {
   constructor(private cartService: CartService) {}
 
-  @Get()
-  getCart(): string {
-    return this.cartService.test();
+  @Get(':userId')
+  getCart(@Param('userId') userId: number): Cart {
+    return this.cartService.getCart(userId);
   }
 
-  @Post()
-  updateCart(): string {
-    return 'TODO';
+  @Post(':userId')
+  updateCart(@Param('userId') userId: number, @Body() product: Product) {
+    this.cartService.addProductToCart(userId, product);
   }
 
-  @Delete()
-  deleteCart(): string {
-    return 'TODO';
+  @Delete(':userId')
+  deleteCart(@Param('userId') userId: number) {
+    this.cartService.deleteCart(userId);
   }
 }

@@ -12,6 +12,5 @@ export interface Product {
 }
 
 export interface Cart {
-  userId: number;
   products: Product[];
 }

@@ -15,10 +15,4 @@ describe('CartService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
-
-  describe('test', () => {
-    it('should return "Service Method"', () => {
-      expect(service.test()).toBe('Service Method');
-    });
-  });
 });
