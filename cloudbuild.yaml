@@ -3,12 +3,14 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 steps:
   # Install dependencies
-  - name: 'gcr.io/cloud-builders/npm'
+  - name: 'node'
+    entrypoint: 'npm'
     args: ['install']
 
-  # Step 2: Run the test script
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['run', 'test']
+  # Test
+  - name: 'node'
+    entrypoint: 'npm'
+    args: ['test']
 
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
