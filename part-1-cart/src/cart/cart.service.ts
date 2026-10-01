@@ -6,7 +6,7 @@ export class CartService {
   private readonly carts: Record<number, Cart> = {};
 
   getCart(userId: number): Cart {
-    return this.carts[userId];
+    return this.carts[userId] ?? ({ products: [] } as Cart);
   }
 
   addProductToCart(userId: number, product: Product) {
