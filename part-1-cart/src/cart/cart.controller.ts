@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CartService } from './cart.service.js';
-import { type Product, type Cart } from '../interfaces/cart.interface.js';
+import { Product, Cart } from '../interfaces/cart.interface.js';
 
 @Controller('cart')
 export class CartController {
