@@ -1,25 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { Cart, Product } from '../interfaces/cart.interface.js';
+import { RedisService } from '../redis/redis.service.js';
 
 @Injectable()
 export class CartService {
-  private readonly carts: Record<number, Cart> = {};
+  constructor(private redisService: RedisService) {}
 
-  getCart(userId: number): Cart {
-    return this.carts[userId] ?? ({ products: [] } as Cart);
+  async getCart(userId: number): Promise<Cart> {
+    const cart = await this.redisService.getCart(userId);
+    return cart ?? ({ products: [] } as Cart);
   }
 
-  addProductToCart(userId: number, product: Product) {
-    if (!Object.hasOwn(this.carts, userId)) {
-      const newCart: Cart = {
-        products: [],
-      };
-      this.carts[userId] = newCart;
-    }
-    this.carts[userId].products.push(product);
+  async addProductToCart(userId: number, product: Product) {
+    const cart = await this.redisService.getCart(userId);
+    const newCart: Cart = {
+      products: [...(cart?.products || []), product],
+    };
+    await this.redisService.setCart(userId, newCart);
   }
 
-  deleteCart(userId: number) {
-    delete this.carts[userId];
+  async deleteCart(userId: number) {
+    await this.redisService.setCart(userId, { products: [] } as Cart);
   }
 }

@@ -7,7 +7,7 @@ export class CartController {
   constructor(private cartService: CartService) {}
 
   @Get(':userId')
-  getCart(@Param('userId') userId: number): Cart {
+  getCart(@Param('userId') userId: number): Promise<Cart> {
     return this.cartService.getCart(userId);
   }
 
