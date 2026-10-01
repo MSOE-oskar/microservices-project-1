@@ -5,7 +5,7 @@ steps:
   # Install dependencies
   - name: 'node'
     entrypoint: 'npm'
-    args: ['run', 'install']
+    args: ['install']
 
   # Test
   - name: 'node'
