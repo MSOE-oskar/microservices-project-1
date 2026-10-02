@@ -9,12 +9,12 @@ export class RedisService {
 
   async getCart(userId: number): Promise<Cart | null> {
     const key = `user:${userId}`;
-    const cart = await this.redis.json.get(key);
-    return cart != null ? (cart as any as Cart) : null;
+    const cart = await this.redis.get(key);
+    return cart != null ? (JSON.parse(cart) as Cart) : null;
   }
 
   async setCart(userId: number, cart: Cart) {
     const key = `user:${userId}`;
-    await this.redis.json.set(key, '$', cart as any);
+    await this.redis.set(key, JSON.stringify(cart));
   }
 }
